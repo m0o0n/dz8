@@ -1,15 +1,17 @@
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'store/contact/slice';
+import { deleteContactThunk } from 'store/contact/actions';
+import { deleteContactSync } from 'store/contact/slice';
 import css from './Contact.module.css';
 
 const Contact = ({ contact }) => {
   const dispatch = useDispatch();
   const handleDelete = id => {
-    dispatch(deleteContact(id));
+    dispatch(deleteContactThunk(id));
+    dispatch(deleteContactSync(id));
   };
   return (
     <li className={css.list_group_item}>
-      {contact.name + ' : ' + contact.number}
+      {contact.name + ' : ' + contact.phone}
       <button
         type="button"
         className={css.btn}
