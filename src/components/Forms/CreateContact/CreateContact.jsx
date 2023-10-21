@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContactThunk } from 'store/contact/actions';
+import { selectorCreateContacts } from 'store/contact/selectors';
 import css from './CreateContact.module.css';
 
 const FormCreateContact = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [isValid, setIsValid] = useState(true);
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(selectorCreateContacts);
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { value, name } }) => {
