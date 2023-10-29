@@ -1,4 +1,4 @@
-import { handlePending, handleRejected, handleFulfilled } from "./helpers";
+import { handlePending, handleRejected, handleFulfilled, handleFulfiledLogin } from "./helpers";
 
 const { createSlice } = require("@reduxjs/toolkit")
 const { registrateThunk, authThunk, logoutThunk, loginThunk } = require("./actions")
@@ -17,26 +17,17 @@ const authSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder
-        .addCase(registrateThunk.fulfilled, (state, {payload}) => {
-            state.name = payload.user.name
-            state.email = payload.user.email
-            state.isAuth = true
-        })
+        .addCase(registrateThunk.fulfilled, handleFulfiledLogin)
+        .addCase(loginThunk.fulfilled, handleFulfiledLogin)
         .addCase(authThunk.fulfilled, (state, {payload}) => {
             state.name = payload.name
             state.email = payload.email
             state.isAuth = true
         })
-        .addCase(logoutThunk.fulfilled, (state, {payload}) => {
+        .addCase(logoutThunk.fulfilled, (state, _) => {
             state.name = ''
             state.email = ''
             state.isAuth = false
-        })
-        .addCase(loginThunk.fulfilled, (state, {payload}) => {
-            console.log(payload)
-            state.name = payload.user.name
-            state.email = payload.user.email
-            state.isAuth = true
         })
         .addMatcher(action => action.type.endsWith('/pending'), handlePending)
         .addMatcher(action => action.type.endsWith('/rejected'), handleRejected)
