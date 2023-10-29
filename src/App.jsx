@@ -14,7 +14,6 @@ import PublicRoute from 'guard/PublicRoute';
 const App = () => {
   const dispath = useDispatch()
   useEffect(() => {
-    console.log('here')
     dispath(authThunk())
   }, [dispath])
   return (
