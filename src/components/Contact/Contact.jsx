@@ -11,7 +11,7 @@ const Contact = ({ contact }) => {
   };
   return (
     <li className={css.list_group_item}>
-      {contact.name + ' : ' + contact.phone}
+      {contact.name + ' : ' + contact.number}
       <button
         type="button"
         className={css.btn}

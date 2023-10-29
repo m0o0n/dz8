@@ -1,9 +1,10 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation, Outlet } from "react-router-dom";
+import { logoutThunk } from "store/auth/actions";
 
 export const Layout = () => {
-    const auth = useSelector(state => state)
-    const {pathname} = useLocation()
+    const auth = useSelector(state => state.auth)
+    const { pathname } = useLocation()
 
     return (
         <>
@@ -28,7 +29,7 @@ export const Layout = () => {
 
 
                     {
-                        !auth
+                        !auth.isAuth
                             ? <NavLink
                                 to="/login"
                                 className={({ isActive }) =>
@@ -37,11 +38,7 @@ export const Layout = () => {
                             >
                                 Login
                             </NavLink>
-                            : <NavLink
-                                to={pathname}
-                            >
-                                Logout
-                            </NavLink>
+                            : <UserInfo email={auth.email} pathname={pathname}  />
                     }
 
 
@@ -52,5 +49,23 @@ export const Layout = () => {
                 <Outlet />
             </main>
         </>
+    )
+}
+
+
+const UserInfo = ({ email, pathname }) => {
+    const dispatch = useDispatch()
+    const handleLogout = () => {
+      dispatch(logoutThunk())
+    }
+    return (
+        <div>
+            <p>{email}</p>
+            <NavLink to={pathname}>
+                <button onClick={handleLogout}>
+                    Logout
+                </button>
+            </NavLink>
+        </div>
     )
 }

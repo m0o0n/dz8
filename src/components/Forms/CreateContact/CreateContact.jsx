@@ -29,7 +29,7 @@ const FormCreateContact = () => {
     if (isAlreadyExist) {
       resetForm();
       return alert(`${name} is already in contacts`);
-    } else dispatch(addContactThunk({ name, phone, isValid }));
+    } else dispatch(addContactThunk({ name, number: phone, isValid }));
     resetForm();
   };
 

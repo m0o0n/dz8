@@ -1,18 +1,34 @@
-import ContactList from 'components/ContactList/ContactList';
-import FormCreateContact from 'components/Forms/CreateContact/CreateContact';
-import FormFilterContact from 'components/Forms/Filter/Filter';
-
-import './store/store';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { authThunk } from 'store/auth/actions';
+import { BrowserRouter, Routes } from "react-router-dom";
+import { Route } from 'react-router-dom';
+import { Layout } from 'components/Common/Layout';
+import Users from 'pages/Users';
+import Login from 'pages/Login';
+import Registate from 'pages/Registrate';
+import Home from 'pages/Home';
+import PrivateRoute from 'guard/PrivateRoute';
+import PublicRoute from 'guard/PublicRoute';
 
 const App = () => {
+  const dispath = useDispatch()
+  useEffect(() => {
+    console.log('here')
+    dispath(authThunk())
+  }, [dispath])
   return (
-    <div className="container">
-      <h1>Phonebook</h1>
-      <FormCreateContact />
-      <h2>Contacts</h2>
-      <FormFilterContact />
-      <ContactList />
-    </div>
+    <BrowserRouter basename="/goit-react-hw-07-phonebook">
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<PrivateRoute><Home /></PrivateRoute>} />
+          <Route path="users" element={<Users />} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/registrate" element={<PublicRoute><Registate /></PublicRoute>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
   );
 };
 

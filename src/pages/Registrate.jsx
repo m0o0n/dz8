@@ -10,8 +10,8 @@ const Registate = () => {
         password: '',
     })
 
-    const hangleChange = ({target: {name, value}}) => {
-        setFormData({...formData, [name]: value})
+    const hangleChange = ({ target: { name, value } }) => {
+        setFormData({ ...formData, [name]: value })
     }
 
     const handleSubmit = (e) => {
@@ -19,11 +19,24 @@ const Registate = () => {
         dispatch(registrateThunk(formData))
         console.log(formData)
     }
-    return(
+    return (
         <form onSubmit={handleSubmit}>
-            <input onChange={hangleChange} value={formData.email} name="email" type="text" />
-            <input onChange={hangleChange} value={formData.name} name="name" type="text" />
-            <input onChange={hangleChange} value={formData.password}  name="password" type="password" />
+            <div>
+                <label htmlFor="email">Enter your email </label>
+                <input id="email" onChange={hangleChange} value={formData.email} name="email" type="text" />
+            </div>
+
+
+            <div>
+                <label htmlFor="name">Enter your name </label>
+                <input id="name" onChange={hangleChange} value={formData.name} name="name" type="text" />
+            </div>
+
+            <div>
+                <label htmlFor="password">Enter your password </label>
+                <input id="password" onChange={hangleChange} value={formData.password} name="password" type="password" />
+            </div>
+
             <button>Registate</button>
         </form>
     )
