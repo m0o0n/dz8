@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { registrateThunk } from "store/auth/actions"
 
-const Registate = () => {
+const RegistrateForm = () => {
     const dispatch = useDispatch()
     const [formData, setFormData] = useState({
         email: '',
@@ -42,4 +42,4 @@ const Registate = () => {
     )
 }
 
-export default Registate
+export default RegistrateForm

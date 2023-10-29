@@ -5,11 +5,10 @@ import { BrowserRouter, Routes } from "react-router-dom";
 import { Route } from 'react-router-dom';
 import { Layout } from 'components/Common/Layout';
 import Users from 'pages/Users';
-import Login from 'pages/Login';
-import Registate from 'pages/Registrate';
 import Home from 'pages/Home';
 import PrivateRoute from 'guard/PrivateRoute';
 import PublicRoute from 'guard/PublicRoute';
+import Auth from 'pages/Auth';
 
 const App = () => {
   const dispath = useDispatch()
@@ -22,8 +21,8 @@ const App = () => {
         <Route path='/' element={<Layout />}>
           <Route index element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path="users" element={<Users />} />
-          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-          <Route path="/registrate" element={<PublicRoute><Registate /></PublicRoute>} />
+          <Route path="/login" element={<PublicRoute><Auth /></PublicRoute>} />
+          <Route path="/registrate" element={<PublicRoute><Auth /></PublicRoute>} />
         </Route>
       </Routes>
     </BrowserRouter>
