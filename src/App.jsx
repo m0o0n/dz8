@@ -4,7 +4,7 @@ import { authThunk } from 'store/auth/actions';
 import { BrowserRouter, Routes } from "react-router-dom";
 import { Route } from 'react-router-dom';
 import { Layout } from 'components/Common/Layout';
-import Users from 'pages/Users';
+import Contacts from 'pages/Contacts';
 import Home from 'pages/Home';
 import PrivateRoute from 'guard/PrivateRoute';
 import PublicRoute from 'guard/PublicRoute';
@@ -19,8 +19,8 @@ const App = () => {
     <BrowserRouter basename="/goit-react-hw-07-phonebook">
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<PrivateRoute><Home /></PrivateRoute>} />
-          <Route path="users" element={<Users />} />
+          <Route index element={<Home />} />
+          <Route path="/contacts" element={<PrivateRoute><Contacts /></PrivateRoute>} />
           <Route path="/login" element={<PublicRoute><Auth /></PublicRoute>} />
           <Route path="/registrate" element={<PublicRoute><Auth /></PublicRoute>} />
         </Route>
