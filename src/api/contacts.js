@@ -7,6 +7,7 @@ export const fetchAllContacts = async () => {
 
 export const createContact = async (formData) => {
     const {data} = await authHostInsance.post('contacts', formData)
+    console.log(data)
     return data
 }
 
